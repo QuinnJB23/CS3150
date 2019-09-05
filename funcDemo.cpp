@@ -4,13 +4,18 @@ Dr. G
 9-2-19
 */
 
+#include "functions.h"
 #include <iostream>
 
 using namespace std;
 
+
 int main()
 {
-	cout << "Hiya\n";
+
+	cout << add(4,5,6)<<"\n";
+	
+	int x = 0;
 }
 
 
