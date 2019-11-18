@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 	cout << "Please enter a filename: ";
 	cin >> filename;
 
-	Quote q1(filename);
+	Quote q1;
 
 	/*ifstream inf(filename);
 
