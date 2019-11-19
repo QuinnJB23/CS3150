@@ -57,7 +57,7 @@ class Quote
 		}
 
 
-		~Quote(){cout << "Object destroyed " << endl;}
+		~Quote(){}
 
 		static int quoteNum;
 
