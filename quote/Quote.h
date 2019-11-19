@@ -10,23 +10,16 @@ class Quote
 {
 	private:
 		string filename;
-		string quotes[1000];
+		string quotes[10000];
 
 
 	public:
 		Quote(string filename="Quotes.txt"):filename(filename)
 		{
-			cout << "Constructor called!" << endl;
 			ifstream inf(filename);
 			if (!inf)
 			{
 				cerr << "unable to open file for reading!" << endl;
-				exit(1);
-			}
-			ofstream outf("out.txt");
-			if (!outf)
-			{
-				cerr << "unable to open file for writing!" << endl;
 				exit(1);
 			}
 			char temp;
@@ -53,10 +46,8 @@ class Quote
 					if (temp != '\n')
 					{
 						quotes[i] += temp;
-						outf << temp;
 					} else
 					{
-						outf << temp;
 						break;
 					}
 					

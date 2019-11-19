@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <ctime>
 #include "Quote.h"
 
 using namespace std;
@@ -9,14 +10,18 @@ int main(int argc, char** argv)
 	string filename = "";
 	int choice;
 	bool check = 0;
+	string q;
+	srand(time(0));
+	int r;
 	if (argc > 1)
 	{
 
 		//get random quote from given filename
-		for (int i = 0; i < argc; i++)
-		{
-			filename += atoi(argv[i+1]);
-		}
+		filename = argv[1];
+		Quote q1(filename);
+		r = rand() % q1.quoteNum;
+		cout << q1.getQuote(r);
+
 		exit(0);
 	} 
 
@@ -27,18 +32,18 @@ int main(int argc, char** argv)
 
 	/*ifstream inf(filename);
 
-	if (!inf)
-	{
-		cerr << "unable to open file for reading!" << endl;
-		exit(1);
-	}
+	  if (!inf)
+	  {
+	  cerr << "unable to open file for reading!" << endl;
+	  exit(1);
+	  }
 
-	ofstream outf ("out.txt");
-	if (!outf)
-	{
-		cerr << "unable to open file for writing!" << endl;
-		exit(1);
-	}*/
+	  ofstream outf ("out.txt");
+	  if (!outf)
+	  {
+	  cerr << "unable to open file for writing!" << endl;
+	  exit(1);
+	  }*/
 
 
 	while (check == 0)
@@ -54,12 +59,12 @@ int main(int argc, char** argv)
 
 		if (choice == 1)
 		{
-			
+			r = rand() % q1.quoteNum + 1;
+			cout << q1.getQuote(r) << endl;
 		} else if (choice == 2)
 		{
-			string q;
 			cout << "Please type the quote you would like to add." << endl;
-			cin >> q;
+			getline(cin >> ws, q);
 			q1.add(q);
 
 		} else if (choice == 3)

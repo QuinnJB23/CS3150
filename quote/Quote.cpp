@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int Quote::quoteNum = 0;
+int Quote::quoteNum = 1;
 
 /*ofstream outf("out.txt");
 if (!outf)
@@ -13,15 +13,33 @@ if (!outf)
 	exit(1);
 }*/
 
+
 void Quote::add(string q)
 {
-	
-	//outf << q << '\n';
+	quotes[quoteNum] = q;
+	quoteNum++;
 }
 
 void Quote::remove(int line)
 {
+	for (int i = line - 1; i < quoteNum; i++)
+	{
+		quotes[i] = quotes[i+1];
+	}
+	quotes[quoteNum-1] = "";
 	quoteNum--;
+
+	ofstream outf("outt.txt");
+	if (!outf)
+	{
+		cerr << "unable to open file for writing!" << endl;
+		exit(1);
+	}
+	for (int i = 0; i < quoteNum; i++)
+	{
+		outf << quotes[i] << '\n';
+	}
+	
 }
 
 int Quote::quoteCount()
@@ -29,7 +47,7 @@ int Quote::quoteCount()
 	return quoteNum;
 }
 
-string Quote::getQuote(int q)
+string Quote::getQuote(int line)
 {
-	return quotes[q];
+	return quotes[line-1];
 }
