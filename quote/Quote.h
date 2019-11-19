@@ -14,7 +14,7 @@ class Quote
 
 
 	public:
-		Quote(string filename):filename("Quotes.txt")
+		Quote(string filename="Quotes.txt"):filename(filename)
 		{
 			cout << "Constructor called!" << endl;
 			ifstream inf(filename);
