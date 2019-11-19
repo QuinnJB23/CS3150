@@ -1,3 +1,6 @@
+//Quote Generator
+//11/16/19
+//Jason Quinn
 #include <iostream>
 #include <fstream>
 #include <ctime>
@@ -5,18 +8,22 @@
 
 using namespace std;
 
+//Get command line arguments
 int main(int argc, char** argv)
 {
+	//initialize variables
 	string filename = "";
 	int choice;
 	bool check = 0;
 	string q;
-	srand(time(0));
 	int r;
+	//set random seed
+	srand(time(0));
+
+	//if filename is given through command line arguments then print random quote from that file
 	if (argc > 1)
 	{
 
-		//get random quote from given filename
 		filename = argv[1];
 		Quote q1(filename);
 		r = rand() % q1.quoteNum;
@@ -25,27 +32,14 @@ int main(int argc, char** argv)
 		exit(0);
 	} 
 
+	//if no command line arguments are given then ask for filename
 	cout << "Please enter a filename: ";
 	cin >> filename;
 
 	Quote q1;
 
-	/*ifstream inf(filename);
 
-	  if (!inf)
-	  {
-	  cerr << "unable to open file for reading!" << endl;
-	  exit(1);
-	  }
-
-	  ofstream outf ("out.txt");
-	  if (!outf)
-	  {
-	  cerr << "unable to open file for writing!" << endl;
-	  exit(1);
-	  }*/
-
-
+	//print out and execute these six options until the user selects to exit
 	while (check == 0)
 	{
 		cout << "Please choose one of the following actions by entering the corresponding number." << endl;

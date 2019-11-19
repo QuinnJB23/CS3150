@@ -1,3 +1,6 @@
+//Quote Generator
+//11/16/19
+//Jason Quinn
 #ifndef QUOTE
 #define QUOTE
 
@@ -8,12 +11,14 @@ using namespace std;
 
 class Quote
 {
+	//private variable declaration
 	private:
 		string filename;
 		string quotes[10000];
 
 
 	public:
+		//constructor that will work with no arguments or one argument
 		Quote(string filename="Quotes.txt"):filename(filename)
 		{
 			ifstream inf(filename);
@@ -57,10 +62,13 @@ class Quote
 		}
 
 
+		//destroys the class when it isn't used anymore
 		~Quote(){}
 
+		//declare quoteNum variable
 		static int quoteNum;
 
+		//declare the class methods
 		void add(string);
 		void remove(int);
 		int quoteCount();
