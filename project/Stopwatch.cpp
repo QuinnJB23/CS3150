@@ -43,9 +43,14 @@ void Stopwatch::start(int people)
 	}
 }
 
-void Stopwatch::lap()
+void Stopwatch::lap(int person, double clockAtStart)
 {
-	cout << "Lap works" << endl;
+	double split;
+	if (splits[person-1].size() == 1)
+	{
+		split = clock() - clockAtStart;
+		splits[person-1].push_back(split);
+	}
 }
 
 void Stopwatch::finish()

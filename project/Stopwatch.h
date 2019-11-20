@@ -9,7 +9,7 @@ using namespace std;
 class Stopwatch
 {
 	private:
-		vector<vector<double>> lapTracker;
+		vector<vector<double>> splits;
 		int people;
 
 	public:
@@ -19,14 +19,14 @@ class Stopwatch
 
 			for (int i = 0; i < people; i++)
 			{
-				
+				splits[i][0] = 0;
 			}
 		}
 
 		~Stopwatch() {cout << "Stopwatch destroyed!";}
 
 		void start(int);
-		void lap();
+		void lap(int, double);
 		void finish();
 
 };
