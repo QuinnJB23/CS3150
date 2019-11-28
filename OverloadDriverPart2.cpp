@@ -1,6 +1,7 @@
 //Demo code for operator overload in C++
 
 #include <iostream>
+#include "OverloadDriverPart2.h"
 
 using namespace std;
 
@@ -21,6 +22,10 @@ class Point
 
 		friend ostream& operator<<(ostream&, const Point&);
 		friend istream& operator>>(istream&, Point&);
+		friend class Line;
+		friend istream& operator>>(istream&, Line&);
+		friend ostream& operator<<(ostream&, const Line&);
+		friend void operator++(Line&);
 
 };
 
@@ -76,16 +81,46 @@ class Line
 		Line();
 		Line(Point, Point);
 		void showLine();
+
+		friend istream& operator>>(istream&, Line&);
+		friend ostream& operator<<(ostream&, const Line&);
+		friend void operator++(Line&);
+
 };
 
 Line::Line(Point p1, Point p2):p1(p1),p2(p2){}
 Line::Line(){}		// why don't I need to construct the points?
 void Line::showLine(){p1.showPoint(); p2.showPoint();}
 
+istream& operator>>(istream& ist, Line& l)
+{
+	cout << "Line 1" << endl;
+	cout << "x = ";
+	ist >> l.p1.x;
+	cout << "y = ";
+	ist >> l.p1.y;
+	cout << "Line 2" << endl;
+	cout << "x = ";
+	ist >> l.p2.x;
+	cout << "y = ";
+	ist >> l.p2.y;
+}
+
+ostream& operator<<(ostream& ost, const Line& l)
+{
+	return ost << "(" << l.p1.x << "," << l.p1.y << ") (" << l.p2.x << "," << l.p2.y << ")";
+}
+
+void operator++(Line& l)
+{
+	++l.p2.x;
+	++l.p2.y;
+}
+
 int main()
 {
 
-	Point p1 (3,5);
+	//Point p1 (3,5);
 	/*Point p2;
 
 	cout << p1 << endl;
@@ -96,8 +131,8 @@ int main()
 	++p1;
 	cout << p1 << endl;
 	*/
-	p1++;
-	cout << p1[1];
+	//p1++;
+	//cout << p1[1];
 
 	//PART 1
 	//1. Review the above classes and answer any questions
@@ -125,9 +160,20 @@ int main()
 	//1. Member function or friend function?
 	//2. Create a output operator overload for point. 
 	//3. Implement a line output stream operator for homework. 
+	
+	cout << "Q3: " << endl;
+	Point p1;
+	cin >> p1;
+	cout << p1 << endl;
+
 	//4. Create an input stream operator for point. 
 	//5. Why did we have to drop the const in this situation?
 	//6. Implement a line input stream operator for homework. 
+	cout << "Q6: " << endl;
+	Line l1;
+	cin >> l1;
+	cout << l1 << endl;
+
 	//7. Let's talk about conversion. Would that be a member of friend?
 	//8. We aren't going to implement conversion for this class. I don't think it makes
 	//sense in this example, but make sure you read through it. 
@@ -136,10 +182,17 @@ int main()
 	//11. Create a post increment overload
 	//12. What is the functional difference?
 	//13. Implement a pre increment overload for line that just increments p2 for homework
+	
+	++l1;
+	cout << l1 << endl;
+
 	//14. Subscript member or friend?
 	//15. What would it return and what would you need to send it?
 	//16. Create a subscript operator overload for point
 	//17. Implement a subscript operator for line that returns a point for homework
+	
+
+
 	//18. How else could you setup a subscript operator with line?
 
 	
