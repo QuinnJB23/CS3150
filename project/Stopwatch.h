@@ -19,7 +19,7 @@ class Stopwatch
 
 			for (int i = 0; i < people; i++)
 			{
-				splits[i][0] = 0;
+				splits[i].push_back(0);
 			}
 		}
 

@@ -11,6 +11,7 @@ void Stopwatch::start(int people)
 {
 	bool started = 0;
 	string start;
+	//wait for the user to enter start
 	while (!started)
 	{
 		cout << "Please type 'start' to start the stopwatch." << endl;
@@ -29,15 +30,20 @@ void Stopwatch::start(int people)
 	string in;
 	cout << "Stopwatch started" << endl;
 	cout << "Enter athlete number to record their lap or type 'all' to record all athletes laps" << endl;
+	//keep stopwatch going until user wants to quit
 	while (!quit)
 	{
 		cin >> in;
-		if (in == "stop" || in == "Stop")
+
+		//if users wants to quit then run finish method
+		if (in == "stop" || in == "Stop" || in == "quit" || in == "Quit")
 		{
 			finish();
+			//call lap method for all runners
 		} else if (in == "all" || in == "All")
 		{
 			lap(0, clockAtStart);
+			//call lap method for a single runner
 		} else {
 			istringstream iss (in);
 			iss >> person;
@@ -60,6 +66,7 @@ void Stopwatch::lap(int person, double clockAtStart)
 {
 	double split;
 
+	//get the split for all runners
 	if (person == 0)
 	{
 		for(int i = 0; i < people; i++)
@@ -77,14 +84,10 @@ void Stopwatch::lap(int person, double clockAtStart)
 				cout << split << endl;
 			}
 		}
-	} else if (splits[person-1].size() == 1)
-	{
-		split = clock() - clockAtStart;
-		splits[person-1].push_back(split);
-		cout << split << endl;
 	} else
 	{
-		split = clock() - splits[person-1][0];
+		//get the lap for a single runner
+		split = clock() - splits[person-1][0] - clockAtStart;
 		splits[person-1].push_back(split);
 		splits[person-1][0] += split;
 		cout << split << endl;
