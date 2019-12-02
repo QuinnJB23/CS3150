@@ -83,13 +83,17 @@ void Stopwatch::lap(int person, double clockAtStart)
 			{
 				split = total;
 				splits[i].push_back(split);
-				cout << "Split(" << i << "): " << split << "s" << endl;
+				cout << "Split(" << i << "): ";
+				printf("%.2f", split);
+				cout << "s" << endl;
 			} else
 			{
 				split = (total - splits[i][0]);
 				splits[i].push_back(split);
 				splits[i][0] += split;
-				cout << "Split(" << i << "): " << split << "s" << endl;
+				cout << "Split(" << i << "): ";
+				printf("%.2f", split);
+				cout << "s" << endl;
 			}
 		}
 	} else
@@ -98,29 +102,55 @@ void Stopwatch::lap(int person, double clockAtStart)
 		split = (total - splits[person-1][0]);
 		splits[person-1].push_back(split);
 		splits[person-1][0] += split;
-		cout << "Split: " << split << "s" << endl;
+		cout << "Split: ";
+		printf("%.2f", split);
+		cout << "s" << endl;
 	}
 	//cout << "Split: " << split << endl;
-	cout << "Total time: " << total << "s" << endl;
+	cout << "Total time: ";
+	printf("%.2f", total);
+	cout << "s" << endl;
 }
 
 void Stopwatch::finish()
 {
-	bool quit = 0;
+	int in;
 
-	for (int i = 0; i < people; i++)
+	cout << "Please enter a number for the corresponding option." << endl;
+	cout << "1. Print results here." << endl;
+	cout << "2. Print results to a txt file." << endl;
+	cout << "3. Start a new stopwatch." << endl;
+	cout << "4. Exit." << endl;
+
+	cin >> in;
+
+	if (in == 1)
 	{
-		cout << "Athlete #" << i + 1 << ": ";
-		for (int j = 1; j < splits[i].size(); j++)
+		for (int i = 0; i < people; i++)
 		{
-			cout << splits[i][j] << "s ";
+			cout << "Athlete #" << i + 1 << ": ";
+			for (int j = 1; j < splits[i].size(); j++)
+			{
+				printf("%.2f", splits[i][j]);
+				cout << "s ";
+			}
+			cout << endl;
 		}
-		cout << endl;
+	} else if (in == 2)
+	{
+	} else if (in == 3)
+	{
+		cout << "Please enter the number of people from 1 to 10 to track with the stopwatch:" << endl;
+		cin >> people;
+		Stopwatch s(people);
+		s.start(people);
+	} else if (in == 4)
+	{
+		exit(0);
+	} else
+	{
+		cout << "Please enter on of the options listed." << endl;
 	}
-	exit(0);
+	finish();
 
-	/*while (!quit)
-	  {
-	  cout << "";
-	  }*/
 }
