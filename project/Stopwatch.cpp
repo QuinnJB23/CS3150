@@ -72,30 +72,28 @@ void Stopwatch::lap(int person, double clockAtStart)
 	{
 		for(int i = 0; i < people; i++)
 		{
-			cout << splits[i].size() << " is splits size." << endl;
 			if (splits[i].size() == 1)
 			{
 				split = total;
 				splits[i].push_back(split);
-				//cout << split << endl;
+				cout << "Split(" << i << "): " << split << endl;
 			} else
 			{
-				split = (clock() - splits[person-1][0]) / 1000;
+				split = (total - splits[i][0]);
 				splits[i].push_back(split);
 				splits[i][0] += split;
-				//cout << split << endl;
+				cout << "Split(" << i << "): " << split << endl;
 			}
 		}
 	} else
 	{
-		cout << splits[person-1].size() << " is splits size." << endl;
 		//get the lap for a single runner
-		split = (clock() - splits[person-1][0] - clockAtStart) / 1000;
+		split = (total - splits[person-1][0]);
 		splits[person-1].push_back(split);
 		splits[person-1][0] += split;
-		//cout << "Split: " << split << endl;
+		cout << "Split: " << split << endl;
 	}
-	cout << "Split: " << split << endl;
+	//cout << "Split: " << split << endl;
 	cout << "Total time: " << total << endl;
 }
 
