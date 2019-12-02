@@ -17,7 +17,7 @@ void Stopwatch::start(int people)
 		cout << "Please type 'start' to start the stopwatch." << endl;
 		cin >> start;
 
-		if (start == "start" || start == "Start")
+		if (start == "start" || start == "Start" || start == "s")
 		{
 			started = 1;
 		}
@@ -36,7 +36,7 @@ void Stopwatch::start(int people)
 		cin >> in;
 
 		//if users wants to quit then run finish method
-		if (in == "stop" || in == "Stop" || in == "quit" || in == "Quit")
+		if (in == "stop" || in == "Stop" || in == "quit" || in == "Quit" || in == "s" || in == "q")
 		{
 			finish();
 		//call lap method for all runners
