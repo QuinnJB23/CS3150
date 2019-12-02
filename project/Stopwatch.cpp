@@ -76,13 +76,13 @@ void Stopwatch::lap(int person, double clockAtStart)
 			{
 				split = total;
 				splits[i].push_back(split);
-				cout << "Split(" << i << "): " << split << endl;
+				cout << "Split(" << i << "): " << split << "s" << endl;
 			} else
 			{
 				split = (total - splits[i][0]);
 				splits[i].push_back(split);
 				splits[i][0] += split;
-				cout << "Split(" << i << "): " << split << endl;
+				cout << "Split(" << i << "): " << split << "s" << endl;
 			}
 		}
 	} else
@@ -91,10 +91,10 @@ void Stopwatch::lap(int person, double clockAtStart)
 		split = (total - splits[person-1][0]);
 		splits[person-1].push_back(split);
 		splits[person-1][0] += split;
-		cout << "Split: " << split << endl;
+		cout << "Split: " << split << "s" << endl;
 	}
 	//cout << "Split: " << split << endl;
-	cout << "Total time: " << total << endl;
+	cout << "Total time: " << total << "s" << endl;
 }
 
 void Stopwatch::finish()
@@ -105,7 +105,7 @@ void Stopwatch::finish()
 	{
 		for (int j = 1; j < splits[i].size(); j++)
 		{
-			cout << splits[i][j] << " ";
+			cout << splits[i][j] << "s ";
 		}
 		cout << endl;
 	}
