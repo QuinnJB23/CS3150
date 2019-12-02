@@ -40,18 +40,25 @@ void Stopwatch::start(int people)
 		{
 			finish();
 		//call lap method for all runners
-		} else if (in == "all" || in == "All")
+		} else if (in == "all" || in == "All" || in == "a")
 		{
 			lap(0, clockAtStart);
 		//call lap method for a single runner
-		} else {
+		} else
+		{
 			istringstream iss (in);
 			iss >> person;
 			if (iss.fail()) {
 				cout << "Uh-oh" << endl;
 				exit(1);
 			}
-			lap(person, clockAtStart);
+			if (person > people || person < 1)
+			{
+				cout << "That number is outside the range of people that was set." << endl;
+			} else
+			{
+				lap(person, clockAtStart);
+			}
 		}
 
 		//currentLap++;
@@ -103,6 +110,7 @@ void Stopwatch::finish()
 
 	for (int i = 0; i < people; i++)
 	{
+		cout << "Athlete #" << i + 1 << ": ";
 		for (int j = 1; j < splits[i].size(); j++)
 		{
 			cout << splits[i][j] << "s ";
@@ -112,7 +120,7 @@ void Stopwatch::finish()
 	exit(0);
 
 	/*while (!quit)
-	{
-		cout << "";
-	}*/
+	  {
+	  cout << "";
+	  }*/
 }
