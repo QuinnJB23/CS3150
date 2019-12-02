@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <iomanip>
+#include <fstream>
 #include <ctime>
 #include <bits/stdc++.h>
 #include "Stopwatch.h"
@@ -115,6 +117,7 @@ void Stopwatch::lap(int person, double clockAtStart)
 void Stopwatch::finish()
 {
 	int in;
+	double temp;
 
 	cout << "Please enter a number for the corresponding option." << endl;
 	cout << "1. Print results here." << endl;
@@ -138,6 +141,29 @@ void Stopwatch::finish()
 		}
 	} else if (in == 2)
 	{
+		ofstream outf("splits.txt");
+		
+		if (!outf)
+		{
+			cerr << "unable to open file for writing!" << endl;
+			exit(1);
+		}
+
+		for (int i = 0; i < people; i++)
+		{
+			outf << "Athlete #" << i + 1 << ": ";
+			for (int j = 1; j < splits[i].size(); j++)
+			{
+				temp = splits[i][j];
+				/*temp = temp * 100 + .5;
+				floor(temp);
+				temp /= 100;*/
+
+				outf << fixed << setprecision(2) << temp;
+				outf << "s ";
+			}
+			outf << '\n';
+		}
 	} else if (in == 3)
 	{
 		cout << "Please enter the number of people from 1 to 10 to track with the stopwatch:" << endl;
