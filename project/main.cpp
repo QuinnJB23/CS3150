@@ -13,7 +13,7 @@ int main()
 
 	if (in == 1)
 	{
-		cout << "Please enter the number of people from 1 to 10 to track with the stopwatch: ";
+		cout << "Please enter the number of people from 1 to 10 to track with the stopwatch:" << endl;
 		int people;
 		cin >> people;
 		Stopwatch s(people);
