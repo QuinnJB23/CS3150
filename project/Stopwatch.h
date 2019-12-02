@@ -9,17 +9,26 @@ using namespace std;
 class Stopwatch
 {
 	private:
-		vector<vector<double>> splits;
+		vector<vector<double>> splits{ {0},
+						{0},
+						{0},
+						{0},
+						{0},
+						{0},
+						{0},
+						{0},
+						{0},
+						{0} };
 		int people;
 
 	public:
 		Stopwatch(int people=1):people(people)
 		{
 			cout << "Constructor is working!" << endl;
-
-			for (int i = 0; i < people; i++)
+			if (people > 10)
 			{
-				splits[i].push_back(0);
+				cerr << "Please enter 10 or less people.";
+				exit(1);
 			}
 		}
 
