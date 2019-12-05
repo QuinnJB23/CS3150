@@ -1,0 +1,1 @@
+//Use this file to hold the class declaration for character

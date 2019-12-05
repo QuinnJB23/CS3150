@@ -16,6 +16,7 @@ class Point
 		Point();
 		Point(int, int);
 		void showPoint();
+
 		Point operator++();
 		Point operator++(int);
 		int& operator[](int);
