@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-	Date d1;
+	Date d1(13, 32, -1);
 	Date d2(5, 5, 5);
 
 	//=
@@ -49,4 +49,9 @@ int main()
 	{
 		cout << "Somthing is wrong." << endl;
 	}
+
+	DateTime dt1(12, 5, 15, 10, 12, 13);
+	cout << "dt1: " << endl;
+	cin >> dt1;
+	cout << "dt1: " << dt1;
 }

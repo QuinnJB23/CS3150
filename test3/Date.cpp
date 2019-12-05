@@ -56,28 +56,38 @@ Date Date::operator++(int)
 	return temp;
 }
 
-ostream& operator<<(ostream& ost, const Date& d)
+ostream& Date::print(ostream& ost) const
 {
-	return ost << d.month << '-' << d.day << '-' << d.year;
+	return ost << month << '-' << day << '-' << year;
 }
 
-istream& operator>>(istream& ist, Date& d)
+ostream& operator<<(ostream& ost, const Date& d)
+{
+	return d.print(ost);
+}
+
+istream& Date::read(istream& ist)
 {
 	cout << "month = ";
-	ist >> d.month;
+	ist >> month;
 
 	cout << "day = ";
-	ist >> d.day;
+	ist >> day;
 
 	cout << "year = ";
-	ist >> d.year;
+	ist >> year;
 
 	return ist;
 }
 
+istream& operator>>(istream& ist, Date& d)
+{
+	return d.read(ist);
+}
+
 Date Date::operator+(int a)
 {
-	bool done;
+	bool done = 0;
 	day += a;
 	while (!done)
 	{
