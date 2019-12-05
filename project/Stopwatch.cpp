@@ -48,25 +48,32 @@ void Stopwatch::start(int people)
 		//call lap method for a single runner
 		} else
 		{
+
+			//convert input to int
 			istringstream iss (in);
+			try{
 			iss >> person;
-			if (iss.fail()) {
+			}
+
+			catch (exception& e) {
+				cout << "exception caught";
+			}
+
+			/*if (iss.fail()) {
 				cout << "Uh-oh" << endl;
 				exit(1);
-			}
+			}*/
+			
+			//if option was invalid
 			if (person > people || person < 1)
 			{
-				cout << "That number is outside the range of people that was set." << endl;
+				cout << "That is not a number or is outside the range of people that was set." << endl;
 			} else
 			{
 				lap(person, clockAtStart);
 			}
 		}
 
-		//currentLap++;
-		//cout << "Lap time: ";
-		//cout << "Time taken in millisecs: " << clock() - clockAtStart << endl;
-		//cout << "Time taken in seconds: " << (clock() - clockAtStart) / 1000 << endl;
 		cin.ignore();
 	}
 }
@@ -76,11 +83,13 @@ void Stopwatch::lap(int person, double clockAtStart)
 	double split;
 	double total = (clock() - clockAtStart) / 1000;
 
-	//get the split for all runners
+	//get the new split for all runners
 	if (person == 0)
 	{
+		//cycle through all people
 		for(int i = 0; i < people; i++)
 		{
+			//if a split hasn't been recorded then just add total time to the back
 			if (splits[i].size() == 1)
 			{
 				split = total;
@@ -90,10 +99,12 @@ void Stopwatch::lap(int person, double clockAtStart)
 				cout << "s" << endl;
 			} else
 			{
+				//subtract total time from the first spot in the vector which keeps track of the total time after each split is taken
 				split = (total - splits[i][0]);
 				splits[i].push_back(split);
 				splits[i][0] += split;
 				cout << "Split(" << i << "): ";
+				//only get 2 decimal places
 				printf("%.2f", split);
 				cout << "s" << endl;
 			}
@@ -119,6 +130,7 @@ void Stopwatch::finish()
 	int in;
 	double temp;
 
+	//print options
 	cout << "Please enter a number for the corresponding option." << endl;
 	cout << "1. Print results here." << endl;
 	cout << "2. Print results to a txt file." << endl;
@@ -129,18 +141,12 @@ void Stopwatch::finish()
 
 	if (in == 1)
 	{
-		for (int i = 0; i < people; i++)
-		{
-			cout << "Athlete #" << i + 1 << ": ";
-			for (int j = 1; j < splits[i].size(); j++)
-			{
-				printf("%.2f", splits[i][j]);
-				cout << "s ";
-			}
-			cout << endl;
-		}
+		//prints results using the overloaded operator <<
+		cout << *this;
 	} else if (in == 2)
 	{
+
+		//get file ready for writing
 		ofstream outf("splits.txt");
 		
 		if (!outf)
@@ -149,34 +155,47 @@ void Stopwatch::finish()
 			exit(1);
 		}
 
-		for (int i = 0; i < people; i++)
-		{
-			outf << "Athlete #" << i + 1 << ": ";
-			for (int j = 1; j < splits[i].size(); j++)
-			{
-				temp = splits[i][j];
-				/*temp = temp * 100 + .5;
-				floor(temp);
-				temp /= 100;*/
+		//use overloaded operator << to put all splits to a text file
+		outf << *this;
 
-				outf << fixed << setprecision(2) << temp;
-				outf << "s ";
-			}
-			outf << '\n';
-		}
 	} else if (in == 3)
 	{
+		//start new stop watch
 		cout << "Please enter the number of people from 1 to 10 to track with the stopwatch:" << endl;
 		cin >> people;
 		Stopwatch s(people);
 		s.start(people);
 	} else if (in == 4)
 	{
+		//exit
 		exit(0);
 	} else
 	{
+		//if user entered an invalid option
 		cout << "Please enter on of the options listed." << endl;
 	}
+
+	//recall finish() if exit wasn't chosen
 	finish();
 
+}
+
+//prints out all splits sorted by person using the << operator
+ostream& operator<<(ostream& ost, const Stopwatch& s)
+{
+	//cycle through each person's vector
+	for (int i = 0; i < s.people; i++)
+	{
+		//print which athlete for the row
+		ost << "Athlete #" << i + 1 << ": ";
+		for (int j = 1; j < s.splits[i].size(); j++)
+		{
+			//print each split to 2 decimal places
+			ost << fixed << setprecision(2) << s.splits[i][j];
+			ost << "s ";
+		}
+		ost << "Total time: " << s.splits[i][0] << '\n';
+	}
+	
+	return ost;
 }
