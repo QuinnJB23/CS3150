@@ -25,7 +25,6 @@ void Stopwatch::start(int people)
 		}
 	}
 	double clockAtStart = clock();
-	//double currentLap = 0;
 	int lapCount = 0;
 	bool quit = 0;
 	int person;
@@ -59,10 +58,6 @@ void Stopwatch::start(int people)
 				cout << "exception caught";
 			}
 
-			/*if (iss.fail()) {
-				cout << "Uh-oh" << endl;
-				exit(1);
-			}*/
 			
 			//if option was invalid
 			if (person > people || person < 1)
@@ -104,6 +99,7 @@ void Stopwatch::lap(int person, double clockAtStart)
 				splits[i].push_back(split);
 				splits[i][0] += split;
 				cout << "Split(" << i << "): ";
+
 				//only get 2 decimal places
 				printf("%.2f", split);
 				cout << "s" << endl;
