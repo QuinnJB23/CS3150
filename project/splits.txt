@@ -1,0 +1,3 @@
+Athlete #1: 2.55s 5.00s 1.33s 0.80s 0.44s 0.31s 0.51s 1.46s Total time: 12.40
+Athlete #2: 4.45s 3.59s 0.84s 0.80s 0.44s 0.31s 0.95s 1.46s Total time: 12.85
+Athlete #3: 6.48s 1.94s 0.47s 0.80s 0.44s 0.31s 1.41s 1.38s Total time: 13.22
